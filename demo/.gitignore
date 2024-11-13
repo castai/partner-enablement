@@ -1,0 +1,8 @@
+*.tfvars
+*.tfstate*
+*.template
+clusters/
+.terraform
+.DS_Store
+.terraform.lock.hcl
+castai*.json

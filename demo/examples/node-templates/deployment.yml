@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centos-dummy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centos-dummy
+  template:
+    metadata:
+      labels:
+        app: centos-dummy
+    spec:
+      containers:
+        - name: dummy
+          image: centos:latest
+          command:
+            - sleep
+            - infinity
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+      nodeSelector:
+        scheduling.cast.ai/node-template: "ultra"
+      tolerations:
+        - key: "scheduling.cast.ai/node-template"
+          value: "ultra"
+          operator: "Equal"
+          effect: "NoSchedule"
